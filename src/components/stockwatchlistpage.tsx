@@ -16,7 +16,7 @@ import axios from 'axios';
 import StockSymbolValidationSchema from '../util/StockSymbolValidator';
 import { GridRowId } from '@mui/x-data-grid';
 
-axios.defaults.baseURL="http://localhost:8080";
+axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;

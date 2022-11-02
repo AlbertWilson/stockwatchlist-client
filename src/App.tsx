@@ -6,7 +6,7 @@ import SignUp from './components/signup';
 import WatchlistPage from './components/stockwatchlistpage';
 import { useHistory } from 'react-router-dom';
 
-axios.defaults.baseURL="http://localhost:8080";
+axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 
 function App() {
 

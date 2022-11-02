@@ -14,7 +14,7 @@ import axios from 'axios';
 import UserInputValidationSchema from '../util/DataInputValidator';
 
 const theme = createTheme();
-axios.defaults.baseURL="http://localhost:8080";
+axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 
 export default function SignIn(props:{logIn:any}) {
 
@@ -28,7 +28,7 @@ export default function SignIn(props:{logIn:any}) {
     }
 
     try {
-      const validInput = await UserInputValidationSchema.validateAsync(user);
+      await UserInputValidationSchema.validateAsync(user);
     } catch (err) {
       alert(err);
       return;

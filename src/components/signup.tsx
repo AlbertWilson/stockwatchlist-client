@@ -16,6 +16,8 @@ import UserInputValidationSchema from '../util/DataInputValidator';
 
 const theme = createTheme();
 
+axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
+
 export default function SignUp() {
   const history = useHistory();
 
@@ -32,6 +34,7 @@ export default function SignUp() {
 
     try {
       const validInput = await UserInputValidationSchema.validateAsync(user);
+      console.log(process.env.WEB_SERVER)
       await axios.post("/register", validInput)
       history.push('/');
     } catch (err){
