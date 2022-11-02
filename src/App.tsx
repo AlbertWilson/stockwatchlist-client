@@ -35,15 +35,23 @@ function App() {
     await history.push("/watchlist");
   }
 
+  async function redirectToSignUp(){
+    await history.push("/signup");
+  }
+
+  async function redirectToSignOn(){
+    await history.push("/");
+  }
+
   return (
       <div className="App">
         {/* Can add a navbar here if I want */}
         <Switch>
           <Route exact path="/">
-            <SignIn logIn={logIn}/>
+            <SignIn logIn={logIn} redirect={redirectToSignUp}/>
           </Route>
           <Route exact path="/signup">
-            <SignUp />
+            <SignUp redirect={redirectToSignOn}/>
           </Route>
           <Route exact path="/watchlist">
             <WatchlistPage logOut={logOut}/>

@@ -18,7 +18,7 @@ const theme = createTheme();
 
 axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 
-export default function SignUp() {
+export default function SignUp(props: {redirect:any}) {
   const history = useHistory();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -115,7 +115,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/" variant="body2">
+                <Link onClick={props.redirect} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

@@ -16,7 +16,7 @@ import UserInputValidationSchema from '../util/DataInputValidator';
 const theme = createTheme();
 axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 
-export default function SignIn(props:{logIn:any}) {
+export default function SignIn(props:{logIn:any, redirect:any}) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -91,7 +91,7 @@ export default function SignIn(props:{logIn:any}) {
             </Button>
             <Grid container justifyContent="right">
               <Grid item>
-                <Link href="/signup" variant="body2">
+                <Link onClick={props.redirect} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
