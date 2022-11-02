@@ -13,6 +13,7 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
+    console.log(process.env.REACT_APP_WEB_SERVER)
     axios.post("/isUserAuth", {},
     {
       headers: {
