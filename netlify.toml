@@ -1,4 +1,4 @@
 [[redirects]]
   from = "/*"
-  to = "/signup"
+  to = "/signup.tsx"
   status = 200
