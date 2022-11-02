@@ -13,7 +13,6 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    console.log(process.env.REACT_APP_WEB_SERVER)
     axios.post("/isUserAuth", {},
     {
       headers: {
@@ -22,7 +21,6 @@ function App() {
     })
     .then(async (resp:any) => {
       console.log(resp);
-      
       return resp.data.isLoggedIn ? history.push("/watchlist"): null;
     });
   }, []);
