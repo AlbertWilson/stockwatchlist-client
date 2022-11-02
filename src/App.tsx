@@ -11,7 +11,6 @@ axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
 function App() {
 
   const history = useHistory();
-  const [firstName, setFirstName] = React.useState("");
 
   React.useEffect(() => {
     axios.post("/isUserAuth", {},
@@ -48,7 +47,7 @@ function App() {
             <SignUp />
           </Route>
           <Route exact path="/watchlist">
-            <WatchlistPage logOut={logOut} firstName={firstName}/>
+            <WatchlistPage logOut={logOut}/>
           </Route>
         </Switch>
       </div>

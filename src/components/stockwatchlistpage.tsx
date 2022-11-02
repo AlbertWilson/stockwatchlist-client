@@ -34,7 +34,7 @@ const AppBar = styled(MuiAppBar, {
 
 const mdTheme = createTheme();
 
-export default function StockWatchlistPage(props: {logOut:any, firstName:string}) {
+export default function StockWatchlistPage(props: {logOut:any}) {
   const [stocks, setStocks] = React.useState<Stock[]>([]);
   const [loading, setLoading] = React.useState(false);
   const [selectedRows, setSelectedRows] = React.useState<GridRowId[]>([]);
@@ -144,15 +144,6 @@ export default function StockWatchlistPage(props: {logOut:any, firstName:string}
         <CssBaseline />
         <AppBar position="absolute">
           <Toolbar>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Hi, {props.firstName}
-            </Typography>
             <Grid>
               <Paper sx={{ p: 1, display: 'flex', flexDirection: 'column' }}>
                 <Button onClick={props.logOut}>Log Out</Button>
