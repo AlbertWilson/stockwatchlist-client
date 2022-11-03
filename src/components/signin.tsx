@@ -29,7 +29,7 @@ export default function SignIn(props:{logIn:any, redirect:any}) {
 
     try {
       await UserInputValidationSchema.validateAsync(user);
-    } catch (err) {
+    } catch (err:any) {
       alert(err);
       return;
     }
@@ -37,8 +37,9 @@ export default function SignIn(props:{logIn:any, redirect:any}) {
     axios.post("/login", user).then((resp:any) => {
       localStorage.setItem("token", resp.data.token);
       props.logIn();
-    }).catch((err) => {
-      alert(err);
+    }).catch((err:any) => {
+      console.log(err.response);
+      alert(err.response.data.message);
     })
   };
 
@@ -91,7 +92,7 @@ export default function SignIn(props:{logIn:any, redirect:any}) {
             </Button>
             <Grid container justifyContent="right">
               <Grid item>
-                <Link onClick={props.redirect} variant="body2">
+                <Link sx={{cursor:'pointer'}} onClick={props.redirect} variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

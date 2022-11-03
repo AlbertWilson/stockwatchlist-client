@@ -34,11 +34,11 @@ export default function SignUp(props: {redirect:any}) {
 
     try {
       const validInput = await UserInputValidationSchema.validateAsync(user);
-      console.log(process.env.WEB_SERVER)
       await axios.post("/register", validInput)
       history.push('/');
-    } catch (err){
-      alert(err);
+    } catch (err:any){
+      console.log(err);
+      alert(err.response.data.message);
     }
   };
 
@@ -115,7 +115,7 @@ export default function SignUp(props: {redirect:any}) {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link onClick={props.redirect} variant="body2">
+                <Link sx={{cursor:'pointer'}} onClick={props.redirect} variant="body2">
                   Already have an account? Sign in
                 </Link>
               </Grid>

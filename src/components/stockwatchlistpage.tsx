@@ -1,10 +1,8 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
@@ -15,22 +13,9 @@ import Stock from '../interfaces/Stock';
 import axios from 'axios';
 import StockSymbolValidationSchema from '../util/StockSymbolValidator';
 import { GridRowId } from '@mui/x-data-grid';
+import StockWatchlistToolBar from './stockwatchlisttoolbar';
 
 axios.defaults.baseURL=process.env.REACT_APP_WEB_SERVER;
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
-}
-
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(['width', 'margin'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  })
-}));
 
 const mdTheme = createTheme();
 
@@ -54,9 +39,10 @@ export default function StockWatchlistPage(props: {logOut:any}) {
         headers: {
           "x-access-token": localStorage.getItem("token")
         }
-      }).then(async (response) => {
+      }).then((response) => {
+        console.log(response.data)
          setStocks((prevStocks) => {
-          return [...prevStocks, response.data[0]]; // response.data[0] because the response comes back as a single value array
+          return [...prevStocks, response.data];
         });
       }).catch((error) => {
         console.error(error);
@@ -142,15 +128,7 @@ export default function StockWatchlistPage(props: {logOut:any}) {
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
         <CssBaseline />
-        <AppBar position="absolute">
-          <Toolbar>
-            <Grid>
-              <Paper sx={{ p: 1, display: 'flex', flexDirection: 'column' }}>
-                <Button onClick={props.logOut}>Log Out</Button>
-              </Paper>
-            </Grid>
-          </Toolbar>
-        </AppBar>
+        <StockWatchlistToolBar theme={mdTheme} logOut={props.logOut}/>
         <Box
           component="main"
           sx={{
