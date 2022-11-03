@@ -33,8 +33,14 @@ export default function SignUp(props: {redirect:any}) {
     }
 
     try {
-      const validInput = await UserInputValidationSchema.validateAsync(user);
-      await axios.post("/register", validInput)
+      await UserInputValidationSchema.validateAsync(user);
+    } catch (err:any) {
+      alert(err);
+      return;
+    }
+
+    try {
+      await axios.post("/register", user);
       history.push('/');
     } catch (err:any){
       console.log(err);
