@@ -114,7 +114,7 @@ export default function StockWatchlistPage(props: {logOut:any}) {
   function deleteStocksFromWatchlist() {
     const updatedStocks = (currentStocks:Stock[], stocksToDelete:String[]):Stock[] => {
         const filtered = currentStocks.filter((currentStock:any) => {
-           return stocksToDelete.indexOf(currentStock.symbol) === -1; // indexOf returns the position a value in string
+           return stocksToDelete.indexOf(currentStock.symbol) === -1; // indexOf returns the position of a value in string
         });
         return filtered;
     };
