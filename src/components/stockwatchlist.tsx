@@ -10,19 +10,23 @@ export default function Stockwatchlist(props: {stocks:any[], isLoading:boolean, 
 
     let percentChange;
     if(currentPrice !== 0) {
-        if(historicalPrice !== 0) {
-          percentChange = (currentPrice - historicalPrice) / historicalPrice;
-        } else {
-          percentChange = currentPrice;
-        }
+      if(historicalPrice !== 0) {
+        percentChange = (currentPrice - historicalPrice) / historicalPrice;
+      } else {
+        percentChange = currentPrice;
+      }
     } else {
       percentChange = - historicalPrice;       
-    }       
+    }
     return percentChange;
     
   }
 
-  function displayPercentage(param:number) {
+  function displayPercentageChange(param:number) {
+    if(!param){
+      return "unavailable";
+    }
+
     const finalVal = Math.abs(param * 100).toFixed(2) + '%';
     if (param >= 0) {
       return (
@@ -41,7 +45,12 @@ export default function Stockwatchlist(props: {stocks:any[], isLoading:boolean, 
     }
   }
 
-  function displayPrice(param:number) {
+  function displayPriceChange(param:number) {
+
+    if(!param){
+      return "unavailable";
+    }
+
     const finalVal = '$' + Math.abs(param).toFixed(2);
     if (param >= 0) {
       return (
@@ -63,11 +72,11 @@ export default function Stockwatchlist(props: {stocks:any[], isLoading:boolean, 
   const columns: GridColDef[] = [
     { field: 'col1', headerName: 'Company Name', width: 225 },
     { field: 'col2', headerName: 'Symbol', width: 100 },
-    { field: 'col3', headerName: 'Day Price', width: 125, type: 'number', valueFormatter: param => '$' + (param?.value).toFixed(2).toString() },
-    { field: 'col4', headerName: 'Day $ Change', width: 125, type: 'number', renderCell: (param) => displayPrice(param?.value) },
-    { field: 'col5', headerName: 'Day % Change', width: 125, type: 'number', renderCell: (param) => displayPercentage(param?.value) },
-    { field: 'col6', headerName: '7 Day % Change', width: 150, type: 'number', renderCell: (param) => displayPercentage(param?.value) },
-    { field: 'col7', headerName: '30 Day % Change', width: 175, type: 'number', renderCell: (param) => displayPercentage(param?.value) },
+    { field: 'col3', headerName: 'Day Price', width: 125, type: 'number', valueFormatter: (param) => '$' + (param?.value).toFixed(2).toString() },
+    { field: 'col4', headerName: 'Day $ Change', width: 125, type: 'number', renderCell: (param) => displayPriceChange(param?.value) },
+    { field: 'col5', headerName: 'Day % Change', width: 125, type: 'number', renderCell: (param) => displayPercentageChange(param?.value) },
+    { field: 'col6', headerName: '7 Day % Change', width: 150, type: 'number', renderCell: (param) => displayPercentageChange(param?.value) },
+    { field: 'col7', headerName: '30 Day % Change', width: 175, type: 'number', renderCell: (param) => displayPercentageChange(param?.value) },
   ];
 
   const rows: GridRowsProp = props.stocks.map((stock) => {

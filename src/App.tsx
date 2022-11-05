@@ -45,7 +45,6 @@ function App() {
 
   return (
       <div className="App">
-        {/* Can add a navbar here if I want */}
         <Switch>
           <Route exact path="/">
             <SignIn logIn={logIn} redirect={redirectToSignUp}/>
